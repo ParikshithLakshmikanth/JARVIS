@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J.A.R.V.I.S — Just A Rather Very Intelligent System</title>
+  <meta name="description" content="JARVIS - A Python-powered AI Voice Assistant with voice recognition, smart searches, app control, news reading, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Particle Canvas Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Scanline Overlay -->
+  <div class="scanlines"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">J.A.R.V.I.S</span>
+        <span class="logo-bracket">]</span>
+      </div>
+      <div class="nav-subtitle">SYSTEM ONLINE</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#home" class="nav-link active" id="nav-home">HOME</a>
+      <a href="#features" class="nav-link" id="nav-features">FEATURES</a>
+      <a href="#commands" class="nav-link" id="nav-commands">COMMANDS</a>
+      <a href="#demo" class="nav-link" id="nav-demo">DEMO</a>
+      <a href="#about" class="nav-link" id="nav-about">ABOUT</a>
+    </nav>
+    <div class="nav-right">
+      <div class="status-badge" id="status-badge">
+        <span class="status-dot"></span>
+        <span class="status-text">ACTIVE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ HERO SECTION ═══════════════════ -->
+  <section class="hero" id="home">
+    <!-- HUD Corner Elements -->
+    <div class="hud-corner hud-tl"></div>
+    <div class="hud-corner hud-tr"></div>
+    <div class="hud-corner hud-bl"></div>
+    <div class="hud-corner hud-br"></div>
+
+    <!-- Central Orb -->
+    <div class="orb-container" id="orb-container">
+      <div class="orb-ring orb-ring-1"></div>
+      <div class="orb-ring orb-ring-2"></div>
+      <div class="orb-ring orb-ring-3"></div>
+      <div class="orb-ring orb-ring-4"></div>
+      <div class="orb-core">
+        <div class="orb-inner">
+          <div class="orb-pulse"></div>
+          <svg class="orb-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <path d="M 50 20 L 50 80 M 20 50 L 80 50" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+            <circle cx="50" cy="50" r="12" fill="currentColor" opacity="0.8"/>
+            <path d="M 30 30 Q 50 10 70 30 Q 90 50 70 70 Q 50 90 30 70 Q 10 50 30 30" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Text -->
+    <div class="hero-content">
+      <div class="hero-tag">// ARTIFICIAL INTELLIGENCE SYSTEM v2.0</div>
+      <h1 class="hero-title">
+        <span class="title-line-1">J.A.R.V.I.S</span>
+        <span class="title-line-2">JUST A RATHER VERY<br><em>INTELLIGENT SYSTEM</em></span>
+      </h1>
+      <p class="hero-desc">
+        A Python-powered voice assistant inspired by Iron Man's AI companion.<br>
+        Speak to command — search the web, control your system, read news, and more.
+      </p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn-primary" id="btn-try-demo">
+          <span class="btn-icon">◈</span> TRY DEMO
+        </a>
+        <a href="#commands" class="btn-secondary" id="btn-commands">
+          <span class="btn-icon">▷</span> VIEW COMMANDS
+        </a>
+      </div>
+    </div>
+
+    <!-- Floating Stat Panels -->
+    <div class="stat-panel stat-panel-left" id="stat-panel-voice">
+      <div class="stat-label">VOICE ENGINE</div>
+      <div class="stat-value">SAPI5</div>
+      <div class="stat-bar"><div class="stat-fill" style="width: 92%"></div></div>
+      <div class="stat-sub">Google Speech API</div>
+    </div>
+    <div class="stat-panel stat-panel-right" id="stat-panel-system">
+      <div class="stat-label">SYSTEM STATUS</div>
+      <div class="stat-value">NOMINAL</div>
+      <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+      <div class="stat-sub" id="live-time">--:--:--</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FEATURES SECTION ═══════════════════ -->
+  <section class="section features-section" id="features">
+    <div class="section-header">
+      <div class="section-tag">// CAPABILITIES MATRIX</div>
+      <h2 class="section-title">WHAT I CAN DO</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card" id="feat-voice" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><path d="M30 10 C24 10 19 15 19 21 L19 33 C19 39 24 44 30 44 C36 44 41 39 41 33 L41 21 C41 15 36 10 30 10Z" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="30" y1="44" x2="30" y2="54" stroke="currentColor" stroke-width="2.5"/><path d="M18 34 C18 42 42 42 42 34" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="22" y1="54" x2="38" y2="54" stroke="currentColor" stroke-width="2.5"/></svg>
+        </div>
+        <h3 class="feat-title">VOICE RECOGNITION</h3>
+        <p class="feat-desc">Real-time speech processing via Google Speech API. Speaks back using Windows SAPI5 TTS engine at a natural rate of 170 WPM.</p>
+        <div class="feat-tech">Google SR · pyttsx3 · SAPI5</div>
+      </div>
+
+      <div class="feature-card" id="feat-search" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><circle cx="26" cy="26" r="14" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="36" y1="36" x2="50" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="20" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="2" opacity="0.6"/><line x1="26" y1="20" x2="26" y2="32" stroke="currentColor" stroke-width="2" opacity="0.6"/></svg>
+        </div>
+        <h3 class="feat-title">SMART SEARCH</h3>
+        <p class="feat-desc">Seamlessly search Google, browse YouTube results, or fetch Wikipedia summaries — all hands-free with voice commands.</p>
+        <div class="feat-tech">Google · YouTube · Wikipedia API</div>
+      </div>
+
+      <div class="feature-card" id="feat-app" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><rect x="8" y="8" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="34" y="8" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="8" y="34" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="34" y="34" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+        </div>
+        <h3 class="feat-title">APP CONTROL</h3>
+        <p class="feat-desc">Launch or kill applications — Chrome, VS Code, Word, Excel, PowerPoint, Paint, CMD — and open any website by name.</p>
+        <div class="feat-tech">os.system · pyautogui · webbrowser</div>
+      </div>
+
+      <div class="feature-card" id="feat-news" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><rect x="6" y="10" width="48" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="6" y1="22" x2="54" y2="22" stroke="currentColor" stroke-width="2"/><line x1="16" y1="32" x2="36" y2="32" stroke="currentColor" stroke-width="2" opacity="0.7"/><line x1="16" y1="40" x2="44" y2="40" stroke="currentColor" stroke-width="2" opacity="0.5"/><circle cx="44" cy="14" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3 class="feat-title">LIVE NEWS</h3>
+        <p class="feat-desc">Reads the latest Indian headlines across 6 categories: Business, Tech, Health, Science, Sports & Entertainment via NewsAPI.</p>
+        <div class="feat-tech">NewsAPI · requests · json</div>
+      </div>
+
+      <div class="feature-card" id="feat-weather" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><circle cx="30" cy="22" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M14 42 C14 35 22 30 30 30 C38 30 46 35 46 42 L46 46 L14 46Z" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="30" y1="8" x2="30" y2="4" stroke="currentColor" stroke-width="2"/><line x1="44" y1="16" x2="47" y2="13" stroke="currentColor" stroke-width="2"/><line x1="16" y1="16" x2="13" y2="13" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3 class="feat-title">WEATHER & TEMP</h3>
+        <p class="feat-desc">Fetches real-time temperature and weather data for Chennai via web scraping with BeautifulSoup from Google Search results.</p>
+        <div class="feat-tech">requests · BeautifulSoup4</div>
+      </div>
+
+      <div class="feature-card" id="feat-media" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><polygon points="25,22 25,38 42,30" fill="currentColor" opacity="0.7"/><circle cx="30" cy="30" r="6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3 class="feat-title">MEDIA CONTROL</h3>
+        <p class="feat-desc">Control playback — play, pause, mute — and adjust system volume up or down using voice commands and keyboard simulation.</p>
+        <div class="feat-tech">pyautogui · pynput · pygame</div>
+      </div>
+
+      <div class="feature-card" id="feat-security" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><path d="M30 6 L50 16 L50 32 C50 44 40 52 30 56 C20 52 10 44 10 32 L10 16 Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M22 30 L28 36 L40 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="feat-title">PASSWORD SECURITY</h3>
+        <p class="feat-desc">Protected access with a 3-attempt password lock. Change your password anytime with a voice command. Persistent encrypted storage.</p>
+        <div class="feat-tech">File I/O · Auth System</div>
+      </div>
+
+      <div class="feature-card" id="feat-game" data-aos>
+        <div class="feat-icon-wrap">
+          <svg class="feat-icon" viewBox="0 0 60 60"><rect x="8" y="16" width="44" height="28" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="22" y1="30" x2="30" y2="30" stroke="currentColor" stroke-width="2.5"/><line x1="26" y1="26" x2="26" y2="34" stroke="currentColor" stroke-width="2.5"/><circle cx="40" cy="28" r="2.5" fill="currentColor" opacity="0.7"/><circle cx="46" cy="32" r="2.5" fill="currentColor" opacity="0.7"/></svg>
+        </div>
+        <h3 class="feat-title">MINI GAME</h3>
+        <p class="feat-desc">Challenge JARVIS to a best-of-5 Rock-Paper-Scissors match! Play using voice commands with full speech recognition and score tracking.</p>
+        <div class="feat-tech">random · speech_recognition</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ COMMANDS SECTION ═══════════════════ -->
+  <section class="section commands-section" id="commands">
+    <div class="section-header">
+      <div class="section-tag">// VOICE COMMAND REFERENCE</div>
+      <h2 class="section-title">COMMAND DATABASE</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cmd-filter-bar">
+      <button class="cmd-filter active" data-filter="all" id="filter-all">ALL</button>
+      <button class="cmd-filter" data-filter="search" id="filter-search">SEARCH</button>
+      <button class="cmd-filter" data-filter="system" id="filter-system">SYSTEM</button>
+      <button class="cmd-filter" data-filter="media" id="filter-media">MEDIA</button>
+      <button class="cmd-filter" data-filter="info" id="filter-info">INFO</button>
+      <button class="cmd-filter" data-filter="game" id="filter-game">GAME</button>
+    </div>
+
+    <div class="cmd-grid" id="cmd-grid">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════ INTERACTIVE DEMO SECTION ═══════════════════ -->
+  <section class="section demo-section" id="demo">
+    <div class="section-header">
+      <div class="section-tag">// INTERACTIVE SIMULATION</div>
+      <h2 class="section-title">TRY IT LIVE</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="demo-wrapper">
+      <!-- Terminal / Console -->
+      <div class="terminal-window" id="terminal-window">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="terminal-title">JARVIS TERMINAL — session_active</div>
+          <div class="terminal-controls">
+            <button class="term-btn" id="btn-clear-term">CLEAR</button>
+          </div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="term-line system">JARVIS AI v2.0 — Initializing core systems...</div>
+          <div class="term-line system">✓ Voice engine loaded (pyttsx3 / SAPI5)</div>
+          <div class="term-line system">✓ Speech recognizer ready (Google SR)</div>
+          <div class="term-line system">✓ All modules imported successfully</div>
+          <div class="term-line prompt-line">Enter Password to open Jarvis: <span class="blink-cursor">█</span></div>
+        </div>
+        <div class="terminal-input-bar">
+          <span class="input-prefix">&gt;&gt;</span>
+          <input type="text" id="demo-input" class="demo-input" placeholder='Try: "wake up", "hello", "play a game", "what is the time"...' autocomplete="off" />
+          <button class="btn-send" id="btn-send-cmd">SEND</button>
+        </div>
+      </div>
+
+      <!-- Quick Command Chips -->
+      <div class="quick-cmds" id="quick-cmds">
+        <div class="quick-label">QUICK COMMANDS:</div>
+        <div class="quick-chips">
+          <button class="chip" data-cmd="ITZME" id="chip-password">Enter Password</button>
+          <button class="chip" data-cmd="wake up" id="chip-wakeup">Wake Up</button>
+          <button class="chip" data-cmd="hello" id="chip-hello">Hello</button>
+          <button class="chip" data-cmd="what is the time" id="chip-time">Time</button>
+          <button class="chip" data-cmd="play a game" id="chip-game">Play Game</button>
+          <button class="chip" data-cmd="google jarvis" id="chip-google">Search Google</button>
+          <button class="chip" data-cmd="youtube music" id="chip-youtube">YouTube</button>
+          <button class="chip" data-cmd="news" id="chip-news">Latest News</button>
+          <button class="chip" data-cmd="temperature" id="chip-temp">Temperature</button>
+          <button class="chip" data-cmd="screenshot" id="chip-screenshot">Screenshot</button>
+          <button class="chip" data-cmd="volume up" id="chip-volup">Volume Up</button>
+          <button class="chip" data-cmd="go to sleep" id="chip-sleep">Sleep</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ABOUT / TECH STACK ═══════════════════ -->
+  <section class="section about-section" id="about">
+    <div class="section-header">
+      <div class="section-tag">// SYSTEM ARCHITECTURE</div>
+      <h2 class="section-title">ABOUT JARVIS</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-story">
+        <h3 class="about-heading">THE ORIGIN</h3>
+        <p>J.A.R.V.I.S — inspired by Tony Stark's iconic AI companion from the Marvel universe — is a Python-based voice assistant built to bring that futuristic feeling to your desktop.</p>
+        <p>Wake it up with a voice command, and it's ready to execute your every digital command — from web searches and app launches to reading the news and checking the weather.</p>
+        <p>Built with passion as a Python learning project, JARVIS combines multiple powerful libraries into one seamless voice-driven experience.</p>
+        <div class="about-quote">
+          <span class="quote-mark">"</span>
+          Good Morning sir, please tell me how can I help you?
+          <span class="quote-mark">"</span>
+        </div>
+      </div>
+
+      <div class="tech-stack">
+        <h3 class="about-heading">TECH STACK</h3>
+        <div class="tech-list">
+          <div class="tech-item" id="tech-python">
+            <div class="tech-name">Python 3</div>
+            <div class="tech-role">Core Language</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:100%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-sr">
+            <div class="tech-name">SpeechRecognition</div>
+            <div class="tech-role">Voice Input</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:90%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-pyttsx">
+            <div class="tech-name">pyttsx3</div>
+            <div class="tech-role">Text-to-Speech</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:85%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-pyautogui">
+            <div class="tech-name">pyautogui</div>
+            <div class="tech-role">GUI Automation</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:80%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-bs4">
+            <div class="tech-name">BeautifulSoup4</div>
+            <div class="tech-role">Web Scraping</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:75%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-pywhatkit">
+            <div class="tech-name">pywhatkit</div>
+            <div class="tech-role">YouTube & Search</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:70%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-wikipedia">
+            <div class="tech-name">wikipedia</div>
+            <div class="tech-role">Knowledge Base</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:65%"></div></div>
+          </div>
+          <div class="tech-item" id="tech-pynput">
+            <div class="tech-name">pynput</div>
+            <div class="tech-role">Keyboard Control</div>
+            <div class="tech-bar"><div class="tech-fill" style="width:60%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Run -->
+    <div class="setup-box" id="setup-box">
+      <h3 class="about-heading">HOW TO RUN</h3>
+      <div class="steps-grid">
+        <div class="step" id="step-1">
+          <div class="step-num">01</div>
+          <div class="step-title">INSTALL DEPS</div>
+          <div class="step-code">pip install pyttsx3 speechrecognition pyautogui pywhatkit wikipedia beautifulsoup4 requests pygame pynput</div>
+        </div>
+        <div class="step" id="step-2">
+          <div class="step-num">02</div>
+          <div class="step-title">RUN MAIN</div>
+          <div class="step-code">python Jarvis_main.py</div>
+        </div>
+        <div class="step" id="step-3">
+          <div class="step-num">03</div>
+          <div class="step-title">ENTER PASSWORD</div>
+          <div class="step-code">ITZME</div>
+        </div>
+        <div class="step" id="step-4">
+          <div class="step-num">04</div>
+          <div class="step-title">ACTIVATE</div>
+          <div class="step-code">Say: "wake up"</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">[ J.A.R.V.I.S ]</div>
+      <p class="footer-copy">Built with Python · Speech · Intelligence<br/>
+        <span class="footer-sub">© 2024 Parikshith · Personal Project</span>
+      </p>
+      <div class="footer-links">
+        <a href="#home" class="footer-link" id="footer-home">↑ BACK TO TOP</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
